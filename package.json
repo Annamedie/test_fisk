@@ -11,14 +11,15 @@
     "seed": "prisma db seed",
     "reset": "tsx prisma/reset.ts",
     "studio": "prisma studio",
-    "test": "dotenv -e .env.test -- cypress open --e2e -b chrome",
-    "test:push": "dotenv -e .env.test -- prisma db push"
+    "test": "cross-env NODE_ENV=test npm run dev & cypress open --e2e -b chrome",
+    "test:push": "cross-env NODE_ENV=test prisma db push"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.15.0",
+    "cross-env": "^7.0.3",
     "dotenv-cli": "^7.4.2",
     "next": "14.2.4",
     "react": "^18",
