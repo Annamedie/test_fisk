@@ -9,6 +9,7 @@ async function main() {
       name: "Blobfish",
       length: 10,
       weight: 5,
+      image: "https://i.ibb.co/G2NVSzm/blobfish.webp",
     },
   });
   await db.fish.upsert({
@@ -19,6 +20,7 @@ async function main() {
       name: "Frilled Shark",
       length: 5,
       weight: 3,
+      image: "https://i.ibb.co/dk5G1T3/Frilled-Shark-Mouth-1536x1024.jpg",
     },
   });
   await db.fish.upsert({
@@ -29,6 +31,7 @@ async function main() {
       name: "Illuminated Netdevil",
       length: 4,
       weight: 2,
+      image: "https://i.ibb.co/37kjtd1/Netdevil.jpg",
     },
   });
   await db.fish.upsert({
@@ -39,6 +42,7 @@ async function main() {
       name: "Monkfish",
       length: 3,
       weight: 1,
+      image: "https://i.ibb.co/5RFhN1G/monkfish.jpg",
     },
   });
   await db.fish.upsert({
@@ -49,6 +53,7 @@ async function main() {
       name: "Goblin Shark",
       length: 2,
       weight: 1,
+      image: "https://i.ibb.co/kBf4rXv/Goblin-shark.jpg",
     },
   });
   await db.fish.upsert({
@@ -59,6 +64,7 @@ async function main() {
       name: "Atlantic Wolffish",
       length: 1,
       weight: 1,
+      image: "https://i.ibb.co/x7qg8F8/atlantic-wolffish.webp",
     },
   });
   await db.fish.upsert({
@@ -69,6 +75,7 @@ async function main() {
       name: "Sloane's Viperfish",
       length: 1,
       weight: 1,
+      image: "https://i.ibb.co/9t6Rt75/viperfish.jpg",
     },
   });
   await db.fish.upsert({
@@ -79,6 +86,7 @@ async function main() {
       name: "Hag fish",
       length: 1,
       weight: 1,
+      image: "https://i.ibb.co/HBkZx0p/hagfish.jpg",
     },
   });
   await db.fish.upsert({
@@ -89,6 +97,7 @@ async function main() {
       name: "Whitemargin Stargazer",
       length: 1,
       weight: 1,
+      image: "https://i.ibb.co/59KDdxp/whitemargin-stargazer.jpg",
     },
   });
   await db.fish.upsert({
@@ -99,6 +108,7 @@ async function main() {
       name: "Red-Lipped Batfish",
       length: 1,
       weight: 1,
+      image: "https://i.ibb.co/cksmGN6/redlipped-batfish.jpg",
     },
   });
 }
