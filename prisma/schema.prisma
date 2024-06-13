@@ -15,5 +15,6 @@ model Fish {
   name      String
   length    Float
   weight    Float
+  ugly      Boolean  @default(true)
   createdAt DateTime @default(now())
 }
