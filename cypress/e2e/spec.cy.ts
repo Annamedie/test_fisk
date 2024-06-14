@@ -1,7 +1,7 @@
 describe("Startpage", () => {
   //innan varje test körs detta
-  before(() => {
-    cy.exec("npm run reset && npm run seed");
+  beforeEach(() => {
+    cy.task("reseed");
   });
   it("Should visit startPage and find a headline", () => {
     cy.visit("/");
