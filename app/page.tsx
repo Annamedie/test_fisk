@@ -3,7 +3,7 @@ import Link from "next/link";
 import FishCard from "./components/FishCard";
 
 export default async function Home() {
-  const fish = await db.fish.findMany();
+  const fish = await db.fish.findMany({ orderBy: { createdAt: "desc" } });
   return (
     <main className="flex  flex-col items-center justify-between p-4 ">
       <h1>Welcome to the ugly but lovely fish site!</h1>
