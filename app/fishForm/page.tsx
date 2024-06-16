@@ -36,6 +36,7 @@ export default function FishForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+      data-cy="add-form"
     >
       <div>
         <label

@@ -17,18 +17,23 @@ describe("Startpage", () => {
   });
 
   it("Should have 10 fishcards", () => {
-    cy.getById("fish-card").should("have.length", 10);
+    cy.getById("fish-card").should("have.length", 2);
   });
 
-  it("", () => {
+  it("Should fill in form and create a new fish", () => {
     // ARRANGE & ACT
-    cy.getById("add-fish").click();
-    cy.get("#add-form").find('[name="title"]').type("En fulfin fisk");
-    cy.get("#add-form").find('[name="image"]').type("http://");
-    cy.get("#add-form").find("button").click();
+    cy.getById("add-fish-button").click();
+    cy.getById("add-form").find("#name").type("En fulfin fisk");
+    cy.getById("add-form").find("#weight").type("5");
+    cy.getById("add-form").find("#length").type("10");
+    cy.getById("add-form")
+      .find("#image")
+      .type("https://i.ibb.co/wJVjXkD/testfisk.jpg");
+    cy.getById("add-form").submit();
 
     // ASSERT
-    cy.get(".fish-card").first().should("have.length", 11);
+    cy.getById("fish-card").should("have.length", 3);
+    cy.getById("fish-card").first().find("h2").contains("En fulfin fisk");
   });
 });
 
