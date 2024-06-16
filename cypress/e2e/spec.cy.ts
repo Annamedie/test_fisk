@@ -37,6 +37,21 @@ describe("Startpage", () => {
   });
 });
 
+describe("Error handling on the form", () => {
+  beforeEach(() => {
+    cy.task("reseed");
+    cy.visit("/fishForm");
+    cy.getById("add-form");
+  });
+  it("Should show error messages for required fields", () => {
+    cy.getById("add-form").find('button[type="submit"]').click();
+    cy.getById("name-error").contains("This field is required");
+    cy.getById("weight-error").contains("This field is required");
+    cy.getById("length-error").contains("This field is required");
+    cy.getById("image-error").contains("This field is required");
+  });
+});
+
 describe("Startpage (mobile)", () => {
   //innan varje test körs detta
   beforeEach(() => {

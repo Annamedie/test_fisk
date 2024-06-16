@@ -51,7 +51,9 @@ export default function FishForm() {
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         />
         {errors.name && (
-          <span className="text-red-500 text-sm">This field is required</span>
+          <span className="text-red-500 text-sm" data-cy="name-error">
+            This field is required
+          </span>
         )}
       </div>
       <div>
@@ -69,7 +71,9 @@ export default function FishForm() {
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         />
         {errors.weight && errors.weight.type === "required" && (
-          <span className="text-red-500 text-sm">This field is required.</span>
+          <span className="text-red-500 text-sm" data-cy="weight-error">
+            This field is required.
+          </span>
         )}
         {errors.weight && errors.weight.type === "min" && (
           <span className="text-red-500 text-sm">Must be greater than 0.</span>
@@ -90,10 +94,14 @@ export default function FishForm() {
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         />
         {errors.length && errors.length.type === "required" && (
-          <span className="text-red-500 text-sm">This field is required</span>
+          <span className="text-red-500 text-sm" data-cy="length-error">
+            This field is required
+          </span>
         )}
         {errors.length && errors.length.type === "min" && (
-          <span className="text-red-500 text-sm">Must be greater than 0</span>
+          <span className="text-red-500 text-sm" data-cy="length-error">
+            Must be greater than 0
+          </span>
         )}
       </div>
       <div>
@@ -109,7 +117,9 @@ export default function FishForm() {
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         />
         {errors.image && (
-          <span className="text-red-500 text-sm">This field is required</span>
+          <span className="text-red-500 text-sm" data-cy="image-error">
+            This field is required
+          </span>
         )}
       </div>
       <div>
