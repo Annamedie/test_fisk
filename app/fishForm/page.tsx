@@ -76,7 +76,9 @@ export default function FishForm() {
           </span>
         )}
         {errors.weight && errors.weight.type === "min" && (
-          <span className="text-red-500 text-sm">Must be greater than 0.</span>
+          <span className="text-red-500 text-sm" data-cy="number-error">
+            Must be greater than 0.
+          </span>
         )}
       </div>
       <div>
@@ -99,7 +101,7 @@ export default function FishForm() {
           </span>
         )}
         {errors.length && errors.length.type === "min" && (
-          <span className="text-red-500 text-sm" data-cy="length-error">
+          <span className="text-red-500 text-sm" data-cy="number-error">
             Must be greater than 0
           </span>
         )}

@@ -50,6 +50,13 @@ describe("Error handling on the form", () => {
     cy.getById("length-error").contains("This field is required");
     cy.getById("image-error").contains("This field is required");
   });
+
+  it("Should show error messages for the weight and length fields if less or equal to zero", () => {
+    cy.getById("add-form").find("#weight").type("0");
+    cy.getById("add-form").find("#length").type("0");
+    cy.getById("add-form").find('button[type="submit"]').click();
+    cy.getById("number-error").contains("Must be greater than 0");
+  });
 });
 
 describe("Startpage (mobile)", () => {
