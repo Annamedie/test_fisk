@@ -25,9 +25,8 @@ export default function FishCard({ fish }: FishCardProps) {
           className="rounded-md"
         />
       </div>
-      <h3>{fish.length} cm</h3>
-      <h3>{fish.weight} kg</h3>
-      <h4>{fish.ugly}</h4>
+      <h3 data-cy="fish-length">{fish.length} dm</h3>
+      <h3 data-cy="fish-weight">{fish.weight} kg</h3>
       <button className="bg-sky-300" onClick={deletefish}>
         Delete
       </button>

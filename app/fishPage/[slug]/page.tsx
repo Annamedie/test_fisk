@@ -19,8 +19,8 @@ export default async function FishPage({ params }: FishPageProps) {
       <Image src={fish.image} alt={fish?.name} width={500} height={500} />
       <h1>{fish.name}</h1>
       <p> {fish.ugly ? "Ugliest" : "Kinda cute"}</p>
-      <p>Weight: {fish.weight} gram</p>
-      <p>Length: {fish.length} cm</p>
+      <p>Weight: {fish.weight} kg</p>
+      <p>Length: {fish.length} dm</p>
       <UglyButton id={fish.id} ugly={fish.ugly} />
     </div>
   );

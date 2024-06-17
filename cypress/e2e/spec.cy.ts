@@ -1,56 +1,54 @@
-// 1. Användaren besöker sidan och ser saker
+// 1. Användaren besöker sidan och ser saker och tar bort en fisk
 // 2. Användaren besöker sidan och skapar en ny fisk....
 // 3. Användaren besöker sidan och klickar sig in på en specifik fisk?
 //cy.get('form').find('img').should('have.attr', 'src', 'My-Logo')
-describe("Startpage", () => {
+describe("Visit the Startpage and deletes a fish", () => {
   //innan varje test körs detta
   beforeEach(() => {
     cy.task("reseed");
     cy.visit("/");
   });
-
-  it("Should visit startPage and find a headline", () => {
+  it("Should visit the startpage see content and delete a fish", () => {
     cy.get("h1")
       .contains("Welcome to the ugly but lovely fish site!")
       .should("be.visible");
-  });
-
-  it("Should have a header and footer", () => {
-    cy.get("header").should("be.visible");
-    cy.get("footer").should("be.visible");
-  });
-
-  it("Should have 2 fishcards", () => {
+    cy.get("header").should("be.visible").contains("Ugly fish");
+    cy.get("footer").should("be.visible").contains("©️Not so pretty fish");
+    cy.getById("add-fish-button").should("be.visible");
     cy.getById("fish-card").should("have.length", 2);
-  });
-
-  it("Should have a button to add a fish", () => {});
-  it("Should be able to delete a fish", () => {
     cy.getById("fish-card")
       .first()
       .within(() => {
+        cy.get("h2").contains("Frilled Shark");
+        cy.getById("fish-length").contains("5 dm");
+        cy.getById("fish-weight").contains("3 kg");
         cy.get("button").contains("Delete").click();
       });
-
     cy.getById("fish-card").should("have.length", 1);
   });
 
-  //flytta till eget test?
-  it("Should fill in form and create a new fish", () => {
-    // ARRANGE & ACT
-    cy.getById("add-fish-button").click();
-    cy.getById("add-form").find("#name").type("En fulfin fisk");
-    cy.getById("add-form").find("#weight").type("5");
-    cy.getById("add-form").find("#length").type("10");
-    cy.getById("add-form")
-      .find("#image")
-      .type("https://i.ibb.co/wJVjXkD/testfisk.jpg");
+  describe("Visit the Startpage and adds a fish", () => {
+    beforeEach(() => {
+      cy.task("reseed");
+      cy.visit("/");
+    });
+    it("Should fill in form and create a new fish", () => {
+      // ARRANGE & ACT
+      cy.getById("add-fish-button").click();
+      cy.getById("add-form").find("#name").type("En fulfin fisk");
+      cy.getById("add-form").find("#weight").type("5");
+      cy.getById("add-form").find("#length").type("10");
+      cy.getById("add-form")
+        .find("#image")
+        .type("https://i.ibb.co/wJVjXkD/testfisk.jpg");
 
-    cy.getById("add-form").submit();
+      cy.getById("add-form").submit();
 
-    // ASSERT
-    cy.getById("fish-card").should("have.length", 3);
-    cy.getById("fish-card").first().find("h2").contains("En fulfin fisk");
+      // ASSERT
+      cy.getById("fish-card").should("have.length", 3);
+      cy.getById("fish-card").first().find("h2").contains("En fulfin fisk");
+      cy.getById("fish-card").first().find("img");
+    });
   });
 });
 
