@@ -24,3 +24,36 @@ export async function deleteFishCard(id: string) {
 
   revalidatePath("/");
 }
+
+export async function findUniqueFish(id: string) {
+  const fish = await db.fish.findUnique({
+    where: {
+      id,
+    },
+  });
+  return fish;
+}
+
+// change the boolean value of ugly to the opposite of what it is
+export async function updateUglyState(id: string) {
+  const uglyFish = await db.fish.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!uglyFish) {
+    return;
+  }
+
+  await db.fish.update({
+    where: {
+      id,
+    },
+    data: {
+      ugly: !uglyFish.ugly,
+    },
+  });
+
+  revalidatePath("/fishPage/[slug]");
+}
