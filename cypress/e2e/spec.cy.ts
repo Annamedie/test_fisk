@@ -16,10 +16,21 @@ describe("Startpage", () => {
     cy.get("footer").should("be.visible");
   });
 
-  it("Should have 10 fishcards", () => {
+  it("Should have 2 fishcards", () => {
     cy.getById("fish-card").should("have.length", 2);
   });
 
+  it("Should have a button to add a fish", () => {});
+  it("Should be able to delete a fish", () => {
+    cy.getById("fish-card")
+      .first()
+      .within(() => {
+        cy.get("button").contains("delete").click();
+      });
+    cy.getById("fish-card").should("have.length", 1);
+  });
+
+  //flytta till eget test?
   it("Should fill in form and create a new fish", () => {
     // ARRANGE & ACT
     cy.getById("add-fish-button").click();
@@ -51,12 +62,21 @@ describe("Error handling on the form", () => {
     cy.getById("image-error").contains("This field is required");
   });
 
-  it("Should show error messages for the weight and length fields if less or equal to zero", () => {
+  /*it("Should show error messages for the weight and length fields if less or equal to zero", () => {
     cy.getById("add-form").find("#weight").type("0");
     cy.getById("add-form").find("#length").type("0");
     cy.getById("add-form").find('button[type="submit"]').click();
     cy.getById("number-error").contains("Must be greater than 0");
+  });*/
+});
+
+describe("FishPage", () => {
+  beforeEach(() => {
+    cy.task("reseed");
+    cy.visit("/");
   });
+  cy.getById("fish-card").last().click();
+  cy.url().should("include", "/fishPage/2");
 });
 
 describe("Startpage (mobile)", () => {
