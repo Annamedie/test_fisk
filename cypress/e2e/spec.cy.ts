@@ -1,3 +1,7 @@
+// 1. Användaren besöker sidan och ser saker
+// 2. Användaren besöker sidan och skapar en ny fisk....
+// 3. Användaren besöker sidan och klickar sig in på en specifik fisk?
+//cy.get('form').find('img').should('have.attr', 'src', 'My-Logo')
 describe("Startpage", () => {
   //innan varje test körs detta
   beforeEach(() => {
@@ -25,8 +29,9 @@ describe("Startpage", () => {
     cy.getById("fish-card")
       .first()
       .within(() => {
-        cy.get("button").contains("delete").click();
+        cy.get("button").contains("Delete").click();
       });
+
     cy.getById("fish-card").should("have.length", 1);
   });
 
@@ -40,6 +45,7 @@ describe("Startpage", () => {
     cy.getById("add-form")
       .find("#image")
       .type("https://i.ibb.co/wJVjXkD/testfisk.jpg");
+
     cy.getById("add-form").submit();
 
     // ASSERT
@@ -62,12 +68,13 @@ describe("Error handling on the form", () => {
     cy.getById("image-error").contains("This field is required");
   });
 
-  /*it("Should show error messages for the weight and length fields if less or equal to zero", () => {
+  it("Should show error messages for the weight and length fields if less or equal to zero", () => {
     cy.getById("add-form").find("#weight").type("0");
     cy.getById("add-form").find("#length").type("0");
     cy.getById("add-form").find('button[type="submit"]').click();
-    cy.getById("number-error").contains("Must be greater than 0");
-  });*/
+    cy.getById("weight-error").contains("Must be greater than 0");
+    cy.getById("length-error").contains("Must be greater than 0");
+  });
 });
 
 describe("FishPage", () => {
@@ -75,8 +82,14 @@ describe("FishPage", () => {
     cy.task("reseed");
     cy.visit("/");
   });
-  cy.getById("fish-card").last().click();
-  cy.url().should("include", "/fishPage/2");
+  it("Should visit a fishPage", () => {
+    cy.getById("fish-card")
+      .last()
+      .within(() => {
+        cy.get("button").contains("Visit the fish").click();
+      });
+    cy.url().should("include", "/fishPage/1");
+  });
 });
 
 describe("Startpage (mobile)", () => {

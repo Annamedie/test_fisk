@@ -65,7 +65,6 @@ export default function FishForm() {
         </label>
         <input
           type="number"
-          min="1"
           id="weight"
           {...register("weight", { required: true, min: 1 })}
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -76,7 +75,7 @@ export default function FishForm() {
           </span>
         )}
         {errors.weight && errors.weight.type === "min" && (
-          <span className="text-red-500 text-sm" data-cy="number-error">
+          <span className="text-red-500 text-sm" data-cy="weight-error">
             Must be greater than 0.
           </span>
         )}
@@ -91,7 +90,6 @@ export default function FishForm() {
         <input
           id="length"
           type="number"
-          min="1"
           {...register("length", { required: true, min: 1 })}
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         />
@@ -101,7 +99,7 @@ export default function FishForm() {
           </span>
         )}
         {errors.length && errors.length.type === "min" && (
-          <span className="text-red-500 text-sm" data-cy="number-error">
+          <span className="text-red-500 text-sm" data-cy="length-error">
             Must be greater than 0
           </span>
         )}

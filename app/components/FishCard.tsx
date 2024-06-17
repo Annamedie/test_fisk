@@ -32,7 +32,7 @@ export default function FishCard({ fish }: FishCardProps) {
         Delete
       </button>
       <Link href={`/fishPage/${fish.id}`}>
-        <span>Visit the fish</span>
+        <button>Visit the fish</button>
       </Link>
     </div>
   );
