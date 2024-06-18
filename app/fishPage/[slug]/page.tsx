@@ -15,12 +15,12 @@ export default async function FishPage({ params }: FishPageProps) {
   }
 
   return (
-    <div>
+    <div data-cy="fish-card-page">
       <Image src={fish.image} alt={fish?.name} width={500} height={500} />
-      <h1>{fish.name}</h1>
-      <p> {fish.ugly ? "Ugliest" : "Kinda cute"}</p>
-      <p>Weight: {fish.weight} kg</p>
-      <p>Length: {fish.length} dm</p>
+      <h2 data-cy="fish-name">{fish.name}</h2>
+      <h2 data-cy="fish-boolean"> {fish.ugly ? "Ugliest" : "Kinda cute"} </h2>
+      <h4 data-cy="fish-weight">Weight: {fish.weight} kg</h4>
+      <h4 data-cy="fish-length">Length: {fish.length} dm</h4>
       <UglyButton id={fish.id} ugly={fish.ugly} />
     </div>
   );
