@@ -38,6 +38,7 @@ describe("Visit the Startpage and adds a fish", () => {
   it("Should fill in form and create a new fish", () => {
     // ARRANGE & ACT
     cy.getById("add-fish-button").click();
+    cy.get("h2").contains("Add your ugly fish to the collection");
     cy.getById("add-form").find("#name").type("En fulfin fisk");
     cy.getById("add-form").find("#weight").type("5");
     cy.getById("add-form").find("#length").type("10");
