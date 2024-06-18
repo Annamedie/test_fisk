@@ -12,7 +12,9 @@ export default function FishCard({ fish }: FishCardProps) {
   };
   return (
     <div
-      className="flex flex-col justify-center p-4 border rounded-lg shadow-md w-50 h-80 transform transition-all duration-300 hover:scale-105 hover:border-blue-500"
+      className={`flex flex-col justify-center p-4 border-2 rounded-lg shadow-md w-50 h-80 transform transition-all duration-300 hover:scale-105 ${
+        fish.ugly ? "hover:border-amber-900" : "hover:border-pink-600"
+      } `}
       data-cy="fish-card"
     >
       <h2 className="text-xl font-bold text-center">{fish.name}</h2>

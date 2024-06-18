@@ -19,6 +19,14 @@ describe("Visit the Startpage and deletes a fish", () => {
     cy.getById("fish-card").should("have.length", 2);
     cy.getById("fish-card")
       .first()
+      .trigger("mouseover")
+      .should("have.css", "transform", "matrix(1, 0, 0, 1, 0, 0)");
+    cy.getById("fish-card")
+      .first()
+      .trigger("mouseover")
+      .should("have.css", "border-color", "rgb(229, 231, 235)");
+    cy.getById("fish-card")
+      .first()
       .within(() => {
         cy.get("h2").contains("Frilled Shark");
         cy.get("img").should("be.visible");
@@ -30,6 +38,7 @@ describe("Visit the Startpage and deletes a fish", () => {
     cy.getById("fish-card").should("have.length", 1);
   });
 });
+
 describe("Visit the Startpage and adds a fish", () => {
   beforeEach(() => {
     cy.task("reseed");
@@ -51,8 +60,8 @@ describe("Visit the Startpage and adds a fish", () => {
     // ASSERT
     cy.getById("fish-card").should("have.length", 3);
     cy.getById("fish-card").first().find("h2").contains("En fulfin fisk");
-    cy.getById("fish-card").first().find("#fish-length").contains("10 dm");
-    cy.getById("fish-card").first().find("#fish-weight").contains("5 kg");
+    cy.getById("fish-card").first().getById("fish-length").contains("10 dm");
+    cy.getById("fish-card").first().getById("fish-weight").contains("5 kg");
     cy.getById("fish-card").first().find("img");
   });
 });
@@ -99,11 +108,21 @@ describe("Visit a page of a fish and press a button to decide if ugly or not", (
     cy.getById("fish-weight").contains("5 kg");
     cy.getById("fish-length").contains("10 dm");
     cy.getById("ugly-button").contains("Nah you are cute!").click();
-    cy.getById("fish-boolean").contains("Kinda cute");
+    cy.getById("fish-boolean")
+      .contains("Kinda cute")
+      .should("have.css", "color", "rgb(236, 72, 153)");
+
     cy.getById("ugly-button").contains("Kinda ugly not gonna lie").click();
-    cy.getById("fish-boolean").contains("Ugliest");
+    cy.getById("fish-boolean")
+      .contains("Ugliest")
+      .should("have.css", "color", "rgb(180, 83, 9)");
+    cy.getById("ugly-button").contains("Nah you are cute!").click();
     cy.get("header").contains("Ugly fish").click();
     cy.url().should("include", "/");
+    cy.getById("fish-card")
+      .last()
+      .trigger("mouseover")
+      .should("have.css", "border-color", "rgb(229, 231, 235)");
     cy.visit("/fishPage/20");
     cy.get("h3").contains("Fish not found");
     cy.get("header").contains("Ugly fish").click();
@@ -116,6 +135,48 @@ describe("Startpage (mobile)", () => {
   beforeEach(() => {
     cy.task("reseed");
     cy.viewport(360, 780);
+  });
+  it("Should ensure all elements are visible and no horizontal scroll is needed", () => {
     cy.visit("/");
+    cy.get("h1")
+      .contains("Welcome to the ugly but lovely fish site!")
+      .should("be.visible");
+    cy.get("header").should("be.visible").contains("Ugly fish");
+    cy.get("footer").should("be.visible").contains("©️Not so pretty fish");
+    cy.getById("add-fish-button").should("be.visible");
+    cy.getById("fish-card").should("be.visible");
+
+    cy.window().then((win) => {
+      const doc = win.document.documentElement;
+      const body = win.document.body;
+
+      expect(doc.scrollWidth).to.equal(doc.clientWidth);
+      expect(body.scrollWidth).to.equal(body.clientWidth);
+    });
+    cy.visit("/fishForm");
+    cy.get("h2")
+      .contains("Add your ugly fish to the collection")
+      .should("be.visible");
+    cy.get("header").should("be.visible").contains("Ugly fish");
+    cy.get("footer").should("be.visible").contains("©️Not so pretty fish");
+    cy.getById("add-form").should("be.visible");
+
+    cy.window().then((win) => {
+      const doc = win.document.documentElement;
+      const body = win.document.body;
+
+      expect(doc.scrollWidth).to.equal(doc.clientWidth);
+      expect(body.scrollWidth).to.equal(body.clientWidth);
+    });
+
+    cy.visit("/fishPage/1");
+    cy.getById("fish-card-page").should("be.visible");
+    cy.window().then((win) => {
+      const doc = win.document.documentElement;
+      const body = win.document.body;
+
+      expect(doc.scrollWidth).to.equal(doc.clientWidth);
+      expect(body.scrollWidth).to.equal(body.clientWidth);
+    });
   });
 });
