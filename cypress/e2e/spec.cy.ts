@@ -47,6 +47,7 @@ describe("Visit the Startpage and adds a fish", () => {
   it("Should fill in form and create a new fish", () => {
     // ARRANGE & ACT
     cy.getById("add-fish-button").click();
+    cy.url().should("eq", "http://localhost:3100/fishForm");
     cy.get("h2").contains("Add your ugly fish to the collection");
     cy.getById("add-form").find("#name").type("En fulfin fisk");
     cy.getById("add-form").find("#weight").type("5");
@@ -58,6 +59,7 @@ describe("Visit the Startpage and adds a fish", () => {
     cy.getById("add-form").submit();
 
     // ASSERT
+    cy.url().should("eq", "http://localhost:3100/");
     cy.getById("fish-card").should("have.length", 3);
     cy.getById("fish-card").first().find("h2").contains("En fulfin fisk");
     cy.getById("fish-card").first().getById("fish-length").contains("10 dm");
@@ -100,7 +102,7 @@ describe("Visit a page of a fish and press a button to decide if ugly or not", (
       .within(() => {
         cy.get("button").contains("Visit the fish").click();
       });
-    cy.url().should("include", "/fishPage/1");
+    cy.url().should("eq", "http://localhost:3100/fishPage/1");
     cy.getById("fish-card-page").should("be.visible");
     cy.get("img").should("be.visible");
     cy.getById("fish-name").contains("Blobfish");
@@ -118,7 +120,7 @@ describe("Visit a page of a fish and press a button to decide if ugly or not", (
       .should("have.css", "color", "rgb(180, 83, 9)");
     cy.getById("ugly-button").contains("Nah you are cute!").click();
     cy.get("header").contains("Ugly fish").click();
-    cy.url().should("include", "/");
+    cy.url().should("eq", "http://localhost:3100/");
     cy.getById("fish-card")
       .last()
       .trigger("mouseover")
@@ -126,11 +128,11 @@ describe("Visit a page of a fish and press a button to decide if ugly or not", (
     cy.visit("/fishPage/20");
     cy.get("h3").contains("Fish not found");
     cy.get("header").contains("Ugly fish").click();
-    cy.url().should("include", "/");
+    cy.url().should("eq", "http://localhost:3100/");
   });
 });
 
-describe("Startpage (mobile)", () => {
+describe("Webpage (mobile)", () => {
   //innan varje test körs detta
   beforeEach(() => {
     cy.task("reseed");
